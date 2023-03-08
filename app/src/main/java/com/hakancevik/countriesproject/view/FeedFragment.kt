@@ -1,24 +1,20 @@
-package com.hakancevik.countriesproject.fragment
+package com.hakancevik.countriesproject.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import com.hakancevik.countriesproject.R
-import com.hakancevik.countriesproject.databinding.FragmentCountryBinding
+import com.hakancevik.countriesproject.databinding.FragmentFeedBinding
 
 
-class CountryFragment : Fragment() {
+class FeedFragment : Fragment() {
 
-    private var _binding: FragmentCountryBinding? = null
-    private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -27,21 +23,18 @@ class CountryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentCountryBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return inflater.inflate(R.layout.fragment_feed, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+
+
     }
 
 

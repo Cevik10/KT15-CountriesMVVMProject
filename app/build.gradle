@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-
+    id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
 }
@@ -33,9 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding = true
-    }
+
     dataBinding{
         enabled = true
     }
