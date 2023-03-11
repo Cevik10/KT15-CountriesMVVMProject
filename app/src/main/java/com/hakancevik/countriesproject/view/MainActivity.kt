@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        ////https://raw.githubusercontent.com/Cevik10/KT14-CountriesMVVMProject/master/countriesdataset.json
+
 
     }
 }

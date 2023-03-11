@@ -4,6 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hakancevik.countriesproject.model.Country
+import com.hakancevik.countriesproject.service.CountryAPIService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class FeedViewModel : ViewModel() {
 
@@ -11,20 +16,36 @@ class FeedViewModel : ViewModel() {
     val countryError = MutableLiveData<Boolean>()
     val countryLoading = MutableLiveData<Boolean>()
 
+    private val countryAPIService = CountryAPIService()
+    private val compositeDisposable = CompositeDisposable()
 
     fun refreshData() {
+        getDataFromAPI()
+    }
 
-        val exampleCountry = Country("turkey", "europe", "Ankara", "tl", "turkish", "none")
-        val example1Country = Country("malesia", "europe", "Ankara", "tl", "turkish", "none")
-        val example2Country = Country("france", "europe", "Ankara", "tl", "turkish", "none")
-        val example3Country = Country("ukraine", "europe", "Ankara", "tl", "turkish", "none")
-        val example4Country = Country("russia", "europe", "Ankara", "tl", "turkish", "none")
-        val example5Country = Country("china", "europe", "Ankara", "tl", "turkish", "none")
-        val countryList = arrayListOf<Country>(exampleCountry,example1Country,example2Country,example3Country,example4Country,example5Country)
+    private fun getDataFromAPI() {
 
-        countries.value = countryList
-        countryError.value = false
-        countryLoading.value = false
+        countryLoading.value = true
+
+        compositeDisposable.add(
+            countryAPIService.getData()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<Country>>() {
+                    override fun onSuccess(t: List<Country>) {
+                        countries.value = t
+                        countryError.value = false
+                        countryLoading.value = false
+                    }
+
+                    override fun onError(e: Throwable) {
+                        countryLoading.value = false
+                        countryError.value = true
+                        e.printStackTrace()
+                    }
+
+                })
+        )
 
     }
 
