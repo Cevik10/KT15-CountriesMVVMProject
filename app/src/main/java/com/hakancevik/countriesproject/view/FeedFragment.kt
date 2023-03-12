@@ -22,7 +22,6 @@ class FeedFragment : Fragment() {
     private val countryAdapter = CountryAdapter(arrayListOf())
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +51,7 @@ class FeedFragment : Fragment() {
             countryListRecyclerView.visibility = View.GONE
             countryErrorText.visibility = View.GONE
 
-            viewModel.refreshData()
+            viewModel.refreshFromAPI()
             swipeRefreshLayout.isRefreshing = false
         }
 
