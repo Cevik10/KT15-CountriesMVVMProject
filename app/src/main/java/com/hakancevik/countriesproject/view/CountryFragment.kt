@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.hakancevik.countriesproject.R
 import com.hakancevik.countriesproject.databinding.FragmentCountryBinding
+import com.hakancevik.countriesproject.util.downloadFromUrl
+import com.hakancevik.countriesproject.util.placeHolderProgressBar
 import com.hakancevik.countriesproject.viewmodel.CountryViewModel
 import com.hakancevik.countriesproject.viewmodel.FeedViewModel
 import kotlinx.android.synthetic.main.fragment_country.*
@@ -19,6 +21,7 @@ class CountryFragment : Fragment() {
 
 
     private lateinit var viewModel: CountryViewModel
+    private var countryUuid = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,21 +41,30 @@ class CountryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+            countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
+        }
+
         viewModel = ViewModelProviders.of(this).get(CountryViewModel::class.java)
-        viewModel.getDataFromRoom()
+        viewModel.getDataFromRoom(countryUuid)
 
         observeLiveData()
 
     }
 
 
-    private fun observeLiveData(){
-        viewModel.countryLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                countryNameText.text = it.countryName
-                countryRegionText.text = it.countryRegion
-                countryCapitalText.text = it.countryCapital
-                countryCurrencyText.text = it.countryCurrency
+    private fun observeLiveData() {
+        viewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country ->
+            country?.let {
+                countryNameText.text = country.countryName
+                countryRegionText.text = country.countryRegion
+                countryCapitalText.text = country.countryCapital
+                countryLanguageText.text = country.countryLanguage
+                countryCurrencyText.text = country.countryCurrency
+
+                context?.let {
+                    countryFlagImageView.downloadFromUrl(country.imageUrl, placeHolderProgressBar(it))
+                }
 
             }
 
