@@ -5,8 +5,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#323131"
         android:orientation="vertical"
-        tools:context=".view.CountryFragment">
+        tools:context=".view.CountryFragment"
+        >
 
         <ImageView
             android:id="@+id/countryFlagImageView"
@@ -43,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Turkey"
+                android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -52,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Ankara"
+                android:textColor="@color/white"
                 android:textSize="19sp" />
 
 
@@ -61,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="TRL"
+                android:textColor="@color/white"
                 android:textSize="19sp" />
 
             <TextView
@@ -69,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Turkish"
+                android:textColor="@color/white"
                 android:textSize="19sp" />
 
             <TextView
@@ -77,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Asia"
+                android:textColor="@color/white"
                 android:textSize="19sp" />
 
 

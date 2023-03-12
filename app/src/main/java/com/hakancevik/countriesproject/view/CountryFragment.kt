@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.hakancevik.countriesproject.R
-import com.hakancevik.countriesproject.databinding.FragmentCountryBinding
+
 import com.hakancevik.countriesproject.util.downloadFromUrl
 import com.hakancevik.countriesproject.util.placeHolderProgressBar
 import com.hakancevik.countriesproject.viewmodel.CountryViewModel
